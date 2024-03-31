@@ -6,20 +6,20 @@ import java.nio.file.*;
 public class BankAccount {
     private String accountNumber;
     private double balance;
-    private String ownerName;
+    private String ownerNum;
     private String pin;
 
     public BankAccount(String accountNumber,String pin, double balance, String ownerName) {
         this.accountNumber = accountNumber;
         this.balance = balance;
-        this.ownerName = ownerName;
+        this.ownerNum = ownerName;
         this.pin=pin;
     }
 
     // Getters and setters
 
     public String toCSV() {
-        return accountNumber+","+pin+","+balance+","+ownerName;
+        return accountNumber+","+pin+","+balance+","+ownerNum;
     }
 
     public String getFileName() {

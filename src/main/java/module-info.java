@@ -10,6 +10,7 @@ module casestudy.demo {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires twilio;
 
     opens casestudy.demo to javafx.fxml;
     exports casestudy.demo;
