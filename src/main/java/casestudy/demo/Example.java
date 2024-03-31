@@ -3,7 +3,7 @@ import com.twilio.Twilio;
 import com.twilio.converter.Promoter;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
-
+import java.util.Random;
 import java.net.URI;
 import java.math.BigDecimal;
 
@@ -20,15 +20,26 @@ public class Example {
 
         ).create();
     }
+    public static String makeOTP(){
+        Random rand = new Random();
+        int x = rand.nextInt(9999);
+        String s = Integer.toString(x);
+        while(s.length()<4){
+            s="0"+s;
+        }
+        return s;
+    }
     public static void main(String[] args) {
-        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-        Message message = Message.creator(
-                new com.twilio.type.PhoneNumber("+916309413050"),
-                new com.twilio.type.PhoneNumber("+13192545845"),
-                "your otp is so and so"
-
-        ).create();
-
-        System.out.println(message.getSid());
+//        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+//        Message message = Message.creator(
+//                new com.twilio.type.PhoneNumber("+916309413050"),
+//                new com.twilio.type.PhoneNumber("+13192545845"),
+//                "your otp is so and so"
+//
+//        ).create();
+//
+//        System.out.println(message.getSid());
+        for (int i =0;i<10;i++)
+            System.out.println(makeOTP());
     }
 }

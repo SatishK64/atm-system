@@ -16,6 +16,14 @@ public class BankAccount {
         this.pin=pin;
     }
 
+    public BankAccount(String csv) {
+        String[] fields = csv.split(",");
+        this.accountNumber = fields[0];
+        this.pin = fields[1];
+        this.balance = Double.parseDouble(fields[2]);
+        this.ownerNum = fields[3];
+    }
+
     // Getters and setters
 
     public String toCSV() {

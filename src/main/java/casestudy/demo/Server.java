@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static casestudy.demo.Example.makeOTP;
+import static casestudy.demo.Example.sendMessage;
 import static casestudy.demo.FileFind.FileFinder;
 import static casestudy.demo.FileFind.WriteFile;
 
@@ -47,30 +49,63 @@ public class Server {
             String command;
             String[] header,values;
             BankAccount ba;
-            String output;
-            while(true){
+            String output,send;
+            double input;
+            int i =0;
+            while(i==0){
 //                command = in.readLine();
-                command = "0,1705,200,satish";
+                command = "2,0001";
                 header = command.split(",");
                 if(header[0].equals("0")){
 
                     ACC_NUMBER=increment_Acc(ACC_NUMBER);
-                    ba = new BankAccount(ACC_NUMBER,header[1],Double.parseDouble(header[2]),header[3]);
+                    command=ACC_NUMBER+","+ command.substring(2);
+                    System.out.println(command);
+                    ba = new BankAccount(command);
 //                    out.println(ACC_NUMBER);
                     WriteFile(ba);
 
-                } else if (header[0].equals(1)) {
-                    output=FileFinder(header[2]);
+                } else if (header[0].equals("1")) {
+                    output=FileFinder(header[2]+".txt");
                     values = output.split(",");
                     switch (header[1]){
-                        case "0":
-
-                            System.out.println(output);
+                        case "0":// The following if for checking balance. (1,0,ACC_NUM)
+                            send = values[2];
+                            System.out.println(send);
+                            i++;
                             break;
-                        case "1":
-
-
+                        case "1":// The following is for Deposit. (1,1,ACC_NUM,Amout)
+                            input = Double.parseDouble(header[3]);
+                            values[2]=Double.toString(Double.parseDouble(values[2])+input);
+                            ba = new BankAccount(String.join(",",values));
+                            WriteFile(ba);
+                            i++;
+                            break;
+                        case "2":// The following is for Withdraw. (1,2,ACC_NUM,Amout)
+                            input = Double.parseDouble(header[3]);
+                            values[2]=Double.toString(Double.parseDouble(values[2])-input);
+                            ba = new BankAccount(String.join(",",values));
+                            WriteFile(ba);
+                            i++;
+                            break;
+                        default:
+                            System.out.println("Error occured.");
+                        break;
                     }
+                } else if (header[0].equals("2")) {
+                    output=FileFinder(header[1]+".txt");
+                    values = output.split(",");
+                    String otp = makeOTP();
+                    //send otp
+                    sendMessage(values[3],otp);
+                    if(true){
+                        values[1]="2005";
+                    }
+                    ba = new BankAccount(String.join(",",values));
+                    WriteFile(ba);
+                    i++;
+                }else {
+                    System.out.println("Error.");
                 }
             }
 
