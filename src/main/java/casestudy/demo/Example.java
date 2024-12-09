@@ -13,10 +13,10 @@ public class Example {
     public static final String AUTH_TOKEN = "90f33a3fe8b1e32ed5b9dd0e9948d853";
     public static void sendMessage(String phoneNum,String OTP){
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-        Message message = Message.creator(
+        Message msg = Message.creator(
                 new com.twilio.type.PhoneNumber("+91"+phoneNum),
-                new com.twilio.type.PhoneNumber("+13192545845"),
-                "your otp is :"+OTP
+                new com.twilio.type.PhoneNumber("+12563635513"),
+                "your otp is : "+OTP
 
         ).create();
     }
@@ -30,15 +30,15 @@ public class Example {
         return s;
     }
     public static void main(String[] args) {
-//        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-//        Message message = Message.creator(
-//                new com.twilio.type.PhoneNumber("+916309413050"),
-//                new com.twilio.type.PhoneNumber("+13192545845"),
-//                "your otp is so and so"
-//
-//        ).create();
-//
-//        System.out.println(message.getSid());
+        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+        Message message = Message.creator(
+                new com.twilio.type.PhoneNumber("+918309686570"),
+                new com.twilio.type.PhoneNumber("+13192545845"),
+                "your otp is so and so"
+
+        ).create();
+
+        System.out.println(message.getSid());
         for (int i =0;i<10;i++)
             System.out.println(makeOTP());
     }
