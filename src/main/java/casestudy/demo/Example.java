@@ -9,8 +9,8 @@ import java.math.BigDecimal;
 
 public class Example {
     // Find your Account Sid and Token at twilio.com/console
-    public static final String ACCOUNT_SID = "AC789d954d1a63fd8ce2d72f6c8f71b34a";
-    public static final String AUTH_TOKEN = "90f33a3fe8b1e32ed5b9dd0e9948d853";
+    public static final String ACCOUNT_SID = "TWILIO_ACCT_ID";
+    public static final String AUTH_TOKEN = "TWILIO_AUTH_TOKEN";
     public static void sendMessage(String phoneNum,String OTP){
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message msg = Message.creator(
